@@ -46,14 +46,12 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String ProductToAddName = request.getParameter("addToCart");
-        System.out.println("add pressed");
         if (ProductToAddName != null) {
             Iterator<Product> itr = ProductDaoMem.getInstance().getAll().iterator();
             while (itr.hasNext()) {
                 Product thisProduct = itr.next();
                 if (thisProduct.getName().equals(ProductToAddName)) {
                     addToCart(thisProduct);
-                    System.out.println(thisProduct);
                 }
             }
         }
@@ -61,8 +59,7 @@ public class ProductController extends HttpServlet {
     }
 
     private void addToCart(Product productToAdd){
-        Cart cart = UserDaoMem.getInstance().findCartForUser(1);
-        System.out.println(productToAdd);
+        Cart cart = UserDaoMem.getInstance().findCartForUser(0);
         cart.addProductToCart(productToAdd);
     }
 }
