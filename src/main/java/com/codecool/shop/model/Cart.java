@@ -24,8 +24,10 @@ public class Cart {
     }
 
     public void addProductToCart(Product product){
-
+        System.out.println("cart.addProductToCart");
+        System.out.println(product);
         listOfProductsInCart.add(product);
+        System.out.println(listOfProductsInCart);
     }
 
     public void removeProductFromCart(Product product){

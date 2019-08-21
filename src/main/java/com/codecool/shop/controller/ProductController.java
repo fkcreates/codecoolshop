@@ -2,9 +2,14 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.UserDaoMem;
+import com.codecool.shop.model.Cart;
+import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -15,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
@@ -37,4 +43,26 @@ public class ProductController extends HttpServlet {
         engine.process("product/index.html", context, resp.getWriter());
     }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String ProductToAddName = request.getParameter("addToCart");
+        System.out.println("add pressed");
+        if (ProductToAddName != null) {
+            Iterator<Product> itr = ProductDaoMem.getInstance().getAll().iterator();
+            while (itr.hasNext()) {
+                Product thisProduct = itr.next();
+                if (thisProduct.getName().equals(ProductToAddName)) {
+                    addToCart(thisProduct);
+                    System.out.println(thisProduct);
+                }
+            }
+        }
+        response.sendRedirect("/");
+    }
+
+    private void addToCart(Product productToAdd){
+        Cart cart = UserDaoMem.getInstance().findCartForUser(1);
+        System.out.println(productToAdd);
+        cart.addProductToCart(productToAdd);
+    }
 }

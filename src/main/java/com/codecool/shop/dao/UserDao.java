@@ -10,6 +10,5 @@ public interface UserDao {
     void add(User user);
     void remove(int id);
     Cart findCartForUser(int id);
-
     List<User> getAll();
 }
