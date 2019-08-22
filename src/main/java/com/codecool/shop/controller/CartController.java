@@ -25,7 +25,9 @@ public class CartController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("cart", userDataStore.findCartForUser(userId).getProductsInCart());
+        context.setVariable("cart", userDataStore.findCartForUser(userId).getCart());
+        context.setVariable("cartProductList", userDataStore.findCartForUser(userId).getProductsInCart());
+        context.setVariable("cartProductsSet", userDataStore.findCartForUser(userId).getSetOfProductsInCart());
         engine.process("product/cart.html", context, resp.getWriter());
     }
 

@@ -1,12 +1,10 @@
 package com.codecool.shop.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class Cart {
-    private List<Product> listOfProductsInCart = new ArrayList<Product>();
-    private float sumPrice = 0;
+    private List<Product> listOfProductsInCart = new ArrayList<>();
+    private float sumPrice;
 
     public Cart(){
     }
@@ -17,6 +15,7 @@ public class Cart {
     }
 
     public float getSumPrice(){
+        sumPrice = 0;
         for(Product product: listOfProductsInCart){
             sumPrice += product.getDefaultPrice();
         }
@@ -30,7 +29,25 @@ public class Cart {
 
     public void removeProductFromCart(Product product){
         listOfProductsInCart.remove(product);
-
     }
 
+    public int getItemCounter(Product product){
+        int itemCounter = 0;
+        for(Product item: listOfProductsInCart){
+            if(item.getId() == product.getId()){
+                itemCounter += 1;
+            }
+        }
+        return itemCounter;
+    }
+
+    public Object getSetOfProductsInCart() {
+        Set<Product> setOfProducts = new HashSet<>(listOfProductsInCart);
+
+        return setOfProducts;
+    }
+
+    public Object getCart() {
+        return this;
+    }
 }

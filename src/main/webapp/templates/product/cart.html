@@ -51,7 +51,7 @@
         </div>
         <div class="card-body">
             <!-- PRODUCT -->
-            <div class="row" th:each="prod,iterStat : ${cart}">
+            <div class="row" th:each="prod,iterStat : ${cartProductsSet}">
                 <div class="col-12 col-sm-12 col-md-2 text-center">
                     <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80"
                          th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'">
@@ -64,15 +64,13 @@
                 </div>
                 <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
                     <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                        <h6><strong th:text="${prod.getDefaultPrice()}">Price <span class="text-muted">$</span></strong>
+                        <h6>Price: <strong th:text="${prod.getDefaultPrice()}">Price <span class="text-muted">$</span></strong>$
                         </h6>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4">
                         <div class="quantity">
-                            <input type="button" value="+" class="plus">
-                            <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
+                            <input type="number" step="1" max="99" min="1" th:value="${cart.getItemCounter(prod)}" title="Qty" class="qty"
                                    size="4">
-                            <input type="button" value="-" class="minus">
                         </div>
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 text-right">
@@ -93,7 +91,7 @@
             <div class="pull-right" style="margin: 10px">
                 <a href="" class="btn btn-success pull-right">Checkout</a>
                 <div class="pull-right" style="margin: 5px">
-                    Total price: <b>We need a method for this feature..$$</b>
+                    Total price: <b th:text="${cart.getSumPrice()}">SumPrice</b>$
                 </div>
             </div>
         </div>
