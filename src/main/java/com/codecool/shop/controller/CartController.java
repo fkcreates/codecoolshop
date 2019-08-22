@@ -25,7 +25,7 @@ import java.util.List;
 public class CartController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws  IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         UserDao userDataStore = UserDaoMem.getInstance();
         int userId = 0;
@@ -39,19 +39,21 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String ProductToRemoveId = request.getParameter("removeFromCart");
-        if (ProductToRemoveId != null) {
-            Cart cart = UserDaoMem.getInstance().findCartForUser(0);
-            Iterator<Product> itr = cart.getAll().iterator();
-            while (itr.hasNext()) {
-                Product thisProduct = itr.next();
-                if (thisProduct.getId() == Integer.parseInt(ProductToRemoveId)) {
-                    cart.removeProductFromCart(thisProduct);
-                    System.out.println(thisProduct);
-                }
-//                break;
+        String removableId = request.getParameter("removeFromCart");
+        int productToRemoveId = Integer.parseInt(removableId);
+        boolean isRemovable = false;
+        Product productToRemove = null;
+        Cart cart = UserDaoMem.getInstance().findCartForUser(0);
+        for (Product product : cart.getAll()) {
+            if (product.getId() == productToRemoveId) {
+                isRemovable = true;
+                productToRemove = product;
             }
         }
+        if (isRemovable == true) {
+            cart.removeProductFromCart(productToRemove);
+        }
+
         response.sendRedirect("/cart/show/");
     }
 }

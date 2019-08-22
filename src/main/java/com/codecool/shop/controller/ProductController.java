@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
@@ -47,14 +48,14 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String ProductToAddId = request.getParameter("addToCart");
-        if (ProductToAddId != null) {
-            Iterator<Product> itr = ProductDaoMem.getInstance().getAll().iterator();
-            while (itr.hasNext()) {
-                Product thisProduct = itr.next();
-                if (thisProduct.getId()  == Integer.parseInt(ProductToAddId)) {
-                    addToCart(thisProduct);
-                }
+        int productToAddId = Integer.parseInt(ProductToAddId);
+        List<Product> products = ProductDaoMem.getInstance().getAll();
+
+        for (Product product : products) {
+            if (product.getId() == productToAddId) {
+                addToCart(product);
             }
+
         }
         response.sendRedirect("/");
     }
