@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Cart {
     private List<Product> listOfProductsInCart = new ArrayList<>();
-    private float sumPrice;
+    private double sumPrice;
 
     public Cart(){
     }
@@ -14,7 +14,7 @@ public class Cart {
         return listOfProductsInCart;
     }
 
-    public float getSumPrice(){
+    public double getSumPrice(){
         sumPrice = 0;
         for(Product product: listOfProductsInCart){
             sumPrice += product.getDefaultPrice();
