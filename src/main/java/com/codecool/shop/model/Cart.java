@@ -1,5 +1,6 @@
 package com.codecool.shop.model;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Cart {
@@ -13,12 +14,16 @@ public class Cart {
         return listOfProductsInCart;
     }
 
-    public double getSumPrice(){
+    public String getSumPrice(){
         sumPrice = 0;
         for(Product product: listOfProductsInCart){
             sumPrice += product.getDefaultPrice();
         }
-        return sumPrice;
+
+        DecimalFormat df = new DecimalFormat("#########0.00");
+        String sumPriceToPrint = df.format(sumPrice);
+
+        return sumPriceToPrint;
     }
 
     public void addProductToCart(Product product){
