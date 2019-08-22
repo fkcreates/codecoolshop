@@ -41,6 +41,7 @@
     <h1>Codecool Shop</h1>
 </div>
 
+
 <div class="container">
     <div class="card shopping-cart">
         <div class="card-header bg-dark text-light">
@@ -74,9 +75,15 @@
                         </div>
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 text-right">
-                        <button type="button" class="btn btn-outline-danger btn-xs">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        <form method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-xs" name="removeFromCart" th:value="${prod.id}">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
                         </button>
+
+                        <!--<form method="post">
+                            <button type="submit" class="btn btn-success" name="removeFromCart" th:value="${prod.getId()}">Remove</button>
+                        </form>-->
+
                     </div>
                 </div>
             </div>
@@ -96,6 +103,15 @@
             </div>
         </div>
     </div>
+<!--=======
+<div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${cart}">
+    <h4 class="card-title" th:text="${prod.getName()}">Product name</h4>
+    <h4 class="card-title" th:text="${prod.getDefaultPrice()}">Default price</h4>
+    <form method="post">
+        <button type="submit" class="btn btn-success" name="removeFromCart" th:value="${prod.getId()}">Remove</button>
+    </form>
+
+>>>>>>> origin/balint-->
 </div>
 
 <div th:replace="footer.html :: copy"></div>

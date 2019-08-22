@@ -10,7 +10,6 @@ public class Cart {
     }
 
     public List<Product> getProductsInCart(){
-
         return listOfProductsInCart;
     }
 
@@ -23,7 +22,6 @@ public class Cart {
     }
 
     public void addProductToCart(Product product){
-
         listOfProductsInCart.add(product);
     }
 
@@ -45,6 +43,10 @@ public class Cart {
         Set<Product> setOfProducts = new HashSet<>(listOfProductsInCart);
 
         return setOfProducts;
+    }
+
+    public List<Product> getAll(){
+        return listOfProductsInCart;
     }
 
     public Object getCart() {
