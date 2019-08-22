@@ -14,10 +14,7 @@ public interface CartDao {
 
     void add(Cart cart);
     void remove(int id);
-
-
     Map<Product, Integer> list(Product product);
-
-    List<Product> getAll();
+    List<Cart> getAll();
 
 }
