@@ -125,3 +125,32 @@
 .shopping-cart {
     margin-top: 20px;
 }
+
+.jumbotron {
+    font-family: "Futura";
+    font-size: 60px;
+    color: white;
+    background-image: url("../img/kitchen3.jpg");
+ }
+
+.category-title {
+    font-family: "Futura";
+    font-size: 35px;
+    text-align: center;
+    background-color: antiquewhite;
+    padding: 10px;
+    margin: 15px;
+}
+
+.prod-name {
+    font-family: "Futura";
+    font-size: 25px;
+}
+
+.b-3 {
+    padding-bottom: 15px;
+}
+
+body {
+    background-color: antiquewhite;
+}
