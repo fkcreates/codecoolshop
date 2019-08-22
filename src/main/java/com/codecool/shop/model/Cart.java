@@ -12,8 +12,6 @@ public class Cart {
     }
 
     public List<Product> getProductsInCart(){
-        System.out.println(listOfProductsInCart);
-
         return listOfProductsInCart;
     }
 
@@ -26,12 +24,14 @@ public class Cart {
 
     public void addProductToCart(Product product){
         listOfProductsInCart.add(product);
-        System.out.println(listOfProductsInCart);
     }
 
     public void removeProductFromCart(Product product){
         listOfProductsInCart.remove(product);
+    }
 
+    public List<Product> getAll(){
+        return listOfProductsInCart;
     }
 
 }

@@ -10,7 +10,6 @@ public class User {
         this.cart = new Cart();
         this.id = generateId();
         this.name = name;
-        System.out.println("this users name is: " + this.name + " id is: " + id);
     }
 
     public int generateId(){
