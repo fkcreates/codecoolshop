@@ -1,5 +1,4 @@
-create database codecoolshop
-	with owner postgres;
+create database codecoolshop;
 
 create table if not exists product_category
 (
@@ -11,8 +10,6 @@ create table if not exists product_category
 	department text
 );
 
-alter table product_category owner to postgres;
-
 create table if not exists supplier
 (
 	id serial not null
@@ -21,8 +18,6 @@ create table if not exists supplier
 	name text not null,
 	description text
 );
-
-alter table supplier owner to postgres;
 
 create table if not exists product
 (
@@ -39,8 +34,6 @@ create table if not exists product
 	default_currency text not null
 );
 
-alter table product owner to postgres;
-
 create table if not exists cart
 (
 	id serial not null
@@ -49,8 +42,6 @@ create table if not exists cart
 		constraint product_id
 			references product
 );
-
-alter table cart owner to postgres;
 
 create table if not exists "user"
 (
@@ -61,7 +52,5 @@ create table if not exists "user"
 			references cart,
 	name text not null
 );
-
-alter table "user" owner to postgres;
 
 
