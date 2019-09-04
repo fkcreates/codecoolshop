@@ -1,5 +1,3 @@
-create database codecoolshop;
-
 create table if not exists product_category
 (
 	id serial not null
