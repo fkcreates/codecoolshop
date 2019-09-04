@@ -2,14 +2,12 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoJdbc;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.UserDaoMem;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -19,17 +17,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
+        ProductDao productDataStore = new ProductDaoJdbc();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
@@ -41,10 +36,11 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int productToAddId = Integer.parseInt(request.getParameter("addToCart"));
-        List<Product> products = ProductDaoMem.getInstance().getAll();
-        Cart cart = UserDaoMem.getInstance().findCartForUser(0);
+        ProductDao productDataStore = new ProductDaoJdbc();
 
+        int productToAddId = Integer.parseInt(request.getParameter("addToCart"));
+        List<Product> products = productDataStore.getAll();
+        Cart cart = UserDaoMem.getInstance().findCartForUser(0);
 
         for (Product product : products) {
             if (product.getId() == productToAddId) {

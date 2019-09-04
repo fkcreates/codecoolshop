@@ -6,29 +6,42 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
+import java.io.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ProductDaoMem implements ProductDao {
+public class ProductDaoJdbc implements ProductDao {
 
-    private List<Product> data = new ArrayList<>();
-    private static ProductDaoMem instance = null;
-
-    private ProductDaoMem() {
-    }
-
-    public static ProductDaoMem getInstance() {
-        if (instance == null) {
-            instance = new ProductDaoMem();
-        }
-        return instance;
-    }
+    private static List<Product> data = new ArrayList<>();
 
     @Override
     public void add(Product product) {
-        product.setId(data.size() + 1);
-        data.add(product);
+
+        String query = "INSERT INTO product (name, description, default_price, default_currency) VALUES (" + "'" + product.getName() + "', '" + product.getDescription() + "', '" + product.getDefaultPrice() + "', '" + product.getDefaultCurrency().getCurrencyCode() + "');";
+
+        //String query = "select * from test where col1=" + "'" + escapedValue + "'";
+        executeQuery(query);
+
+        /*try (Connection connection = ConnectionHandler.getConnection()) {
+            String query = "INSERT INTO product (name, description, default_price, default_currency) VALUES (?, ?, ?, ?)";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1,product.getName());
+            preparedStatement.setString(2,product.getDescription());
+            preparedStatement.setFloat(3,product.getDefaultPrice());
+            preparedStatement.setString(4,product.getDefaultCurrency().getCurrencyCode());
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
     }
 
     @Override
@@ -54,5 +67,18 @@ public class ProductDaoMem implements ProductDao {
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
         return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
+    }
+
+    private void executeQuery(String query) {
+        try (Connection connection = ConnectionHandler.getConnection();
+             Statement statement =connection.createStatement();
+        ){
+            statement.execute(query);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
