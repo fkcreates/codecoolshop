@@ -84,9 +84,43 @@ public class ProductDaoJdbc implements ProductDao {
     @Override
     public List<Product> getAll() {
 
-        List<Product> products = new LinkedList<>();
         String query = "SELECT * FROM product";
 
+        return getListOFProducts(query);
+    }
+
+    @Override
+    public List<Product> getBy(Supplier supplier) {
+
+        String supplierId = String.valueOf(supplier.getId());
+        String query = "SELECT * FROM supplier WHERE id = '" + supplierId + "';";
+
+        return getListOFProducts(query);
+    }
+
+    @Override
+    public List<Product> getBy(ProductCategory productCategory) {
+        String prodCatId = String.valueOf(productCategory.getId());
+        String query = "SELECT * FROM product_categort WHERE id = '" + prodCatId + "';";
+
+        return getListOFProducts(query);
+    }
+
+    private void executeQuery(String query) {
+        try (Connection connection = ConnectionHandler.getConnection();
+             Statement statement = connection.createStatement();
+        ) {
+            statement.execute(query);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private List<Product> getListOFProducts(String query) {
+        List<Product> products = new LinkedList<>();
         try (Connection connection = ConnectionHandler.getConnection();
              Statement statement = connection.createStatement();
              ResultSet result = statement.executeQuery(query)) {
@@ -107,26 +141,4 @@ public class ProductDaoJdbc implements ProductDao {
         return products;
     }
 
-    @Override
-    public List<Product> getBy(Supplier supplier) {
-        return data.stream().filter(t -> t.getSupplier().equals(supplier)).collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Product> getBy(ProductCategory productCategory) {
-        return data.stream().filter(t -> t.getProductCategory().equals(productCategory)).collect(Collectors.toList());
-    }
-
-    private void executeQuery(String query) {
-        try (Connection connection = ConnectionHandler.getConnection();
-             Statement statement = connection.createStatement();
-        ) {
-            statement.execute(query);
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
