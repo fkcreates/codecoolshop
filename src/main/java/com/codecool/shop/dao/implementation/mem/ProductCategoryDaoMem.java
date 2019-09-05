@@ -1,3 +1,4 @@
+/*
 package com.codecool.shop.dao.implementation.mem;
 
 
@@ -44,3 +45,4 @@ public class ProductCategoryDaoMem implements ProductCategoryDao {
         return data;
     }
 }
+*/

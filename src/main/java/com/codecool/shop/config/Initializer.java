@@ -3,7 +3,7 @@ package com.codecool.shop.config;
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.dao.implementation.mem.CartDaoMem;
-import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
+//import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.mem.SupplierDaoMem;
 import com.codecool.shop.dao.implementation.mem.UserDaoMem;
 import com.codecool.shop.model.Product;

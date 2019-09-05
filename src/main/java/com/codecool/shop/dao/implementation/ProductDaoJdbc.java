@@ -8,14 +8,10 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductDaoJdbc implements ProductDao {
-
-    private static List<Product> data = new ArrayList<>();
 
     @Override
     public void add(Product product) {
@@ -25,22 +21,6 @@ public class ProductDaoJdbc implements ProductDao {
                 product.getDefaultPrice() + "', '" + product.getDefaultCurrency().getCurrencyCode() + "';)";
 
         executeQuery(query);
-
-        /*try (Connection connection = ConnectionHandler.getConnection()) {
-            String query = 'INSERT INTO product (name, description, default_price, default_currency) VALUES (?, ?, ?, ?)';
-
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1,product.getName());
-            preparedStatement.setString(2,product.getDescription());
-            preparedStatement.setFloat(3,product.getDefaultPrice());
-            preparedStatement.setString(4,product.getDefaultCurrency().getCurrencyCode());
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
     }
 
     @Override
@@ -53,12 +33,10 @@ public class ProductDaoJdbc implements ProductDao {
              ResultSet result = statement.executeQuery(query)) {
 
             if(result.next()){
-                Product product = new Product(result.getString("name"), result.getFloat("default_price"),
+                Product product = new Product(result.getInt("id"), result.getString("name"), result.getFloat("default_price"),
                         result.getString("default_currency"), result.getString("description"));
-                System.out.println(product.getName());
                 return product;
             } else {
-
                 return null;
             }
 
@@ -86,7 +64,7 @@ public class ProductDaoJdbc implements ProductDao {
 
         String query = "SELECT * FROM product";
 
-        return getListOFProducts(query);
+        return getListOfProducts(query);
     }
 
     @Override
@@ -95,15 +73,20 @@ public class ProductDaoJdbc implements ProductDao {
         String supplierId = String.valueOf(supplier.getId());
         String query = "SELECT * FROM supplier WHERE id = '" + supplierId + "';";
 
-        return getListOFProducts(query);
+        return getListOfProducts(query);
     }
 
     @Override
     public List<Product> getBy(ProductCategory productCategory) {
-        String prodCatId = String.valueOf(productCategory.getId());
-        String query = "SELECT * FROM product_categort WHERE id = '" + prodCatId + "';";
+        int prodId = productCategory.getId();
 
-        return getListOFProducts(query);
+        String prodCatId = String.valueOf(prodId);
+        String query = "SELECT * FROM product WHERE product_category_id = '" + prodCatId + "';";
+
+        List<Product> listOfProds = getListOfProducts(query);
+
+        return listOfProds;
+
     }
 
     private void executeQuery(String query) {
@@ -119,16 +102,15 @@ public class ProductDaoJdbc implements ProductDao {
         }
     }
 
-    private List<Product> getListOFProducts(String query) {
+    private List<Product> getListOfProducts(String query) {
         List<Product> products = new LinkedList<>();
         try (Connection connection = ConnectionHandler.getConnection();
              Statement statement = connection.createStatement();
              ResultSet result = statement.executeQuery(query)) {
 
             while(result.next()){
-                Product product = new Product(result.getString("name"), result.getFloat("default_price"),
+                Product product = new Product(result.getInt("id"), result.getString("name"), result.getFloat("default_price"),
                         result.getString("default_currency"), result.getString("description"));
-                System.out.println(product.getName());
                 products.add(product);
             }
 
