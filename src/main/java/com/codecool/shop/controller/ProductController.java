@@ -2,12 +2,15 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoJdbc;
 import com.codecool.shop.dao.implementation.ProductDaoJdbc;
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.implementation.mem.UserDaoJdbc;
 import com.codecool.shop.dao.implementation.mem.UserDaoMem;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -23,6 +26,8 @@ import java.util.List;
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
+    Cart cart = null;
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDao productDataStore = new ProductDaoJdbc();
@@ -31,9 +36,6 @@ public class ProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("category", productCategoryDataStore.find(1));
-        for(Product product: productDataStore.getBy(productCategoryDataStore.find(1))) {
-            System.out.println(product.getId());
-        }
         context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         engine.process("product/index.html", context, resp.getWriter());
     }
@@ -44,12 +46,16 @@ public class ProductController extends HttpServlet {
 
         int productToAddId = Integer.parseInt(request.getParameter("addToCart"));
         List<Product> products = productDataStore.getAll();
-        Cart cart = UserDaoMem.getInstance().findCartForUser(0);
+        //UserDao user = UserDaoJdbc.getInstance();
+        cart = UserDaoJdbc.getInstance().findCartForUser(1);
 
         for (Product product : products) {
             if (product.getId() == productToAddId) {
                 cart.addProductToCart(product);
             }
+        }
+        for(Product product: cart.getProductsInCart()) {
+            System.out.println(product.getName());
         }
         response.sendRedirect("/");
     }

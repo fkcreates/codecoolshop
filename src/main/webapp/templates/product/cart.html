@@ -52,31 +52,31 @@
         </div>
         <div class="card-body">
             <!-- PRODUCT -->
-            <div class="row" th:each="prod,iterStat : ${cartProductsSet}">
+            <div class="row" th:each="prod : ${cartProductsSet}">
                 <div class="col-12 col-sm-12 col-md-2 text-center b-3">
                     <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80"
-                         th:attr="src='/static/img/product_' + ${prod.getId()} + '.jpg'">
+                         th:attr="src='/static/img/product_' + ${prod.key.getId()} + '.jpg'">
                 </div>
                 <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                    <h4 class="product-name"><strong th:text="${prod.name}">Product Name</strong></h4>
+                    <h4 class="product-name"><strong th:text="${prod.key.name}">Product Name</strong></h4>
                     <h4>
-                        <small th:text="${prod.description}">Product description</small>
+                        <small th:text="${prod.key.description}">Product description</small>
                     </h4>
                 </div>
                 <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
                     <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                        <h6>Price: <strong th:text="${prod.getDefaultPrice()}">Price <span class="text-muted">$</span></strong>$
+                        <h6>Price: <strong th:text="${prod.key.getDefaultPrice()}">Price <span class="text-muted">$</span></strong>$
                         </h6>
                     </div>
                     <div class="col-4 col-sm-4 col-md-4">
                         <div class="quantity">
-                            <input type="number" step="1" max="99" min="1" th:value="${cart.getItemCounter(prod)}" title="Qty" class="qty"
+                            <input type="number" step="1" max="99" min="1" th:value="${prod.value}" title="Qty" class="qty"
                                    size="4">
                         </div>
                     </div>
                     <div class="col-2 col-sm-2 col-md-2 text-right">
                         <form method="post">
-                            <button type="submit" class="btn btn-outline-danger btn-xs" name="removeFromCart" th:value="${prod.id}">
+                            <button type="submit" class="btn btn-outline-danger btn-xs" name="removeFromCart" th:value="${prod.key.id}">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
 

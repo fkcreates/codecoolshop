@@ -6,9 +6,9 @@ public class User {
     private String name;
     private Cart cart;
 
-    public User(String name){
+    public User(int id, String name){
         this.cart = new Cart();
-        this.id = generateId();
+        this.id = id;
         this.name = name;
     }
 
@@ -22,5 +22,9 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 }

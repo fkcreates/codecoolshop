@@ -2,9 +2,11 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.implementation.mem.UserDaoJdbc;
 import com.codecool.shop.dao.implementation.mem.UserDaoMem;
 import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -21,14 +23,14 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        UserDao userDataStore = UserDaoMem.getInstance();
+        UserDao userDataStore = new UserDaoJdbc();
         int userId = 1;
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("cart", userDataStore.findCartForUser(userId).getCart());
         context.setVariable("cartProductList", userDataStore.findCartForUser(userId).getProductsInCart());
-        context.setVariable("cartProductsSet", userDataStore.findCartForUser(userId).getSetOfProductsInCart());
+        context.setVariable("cartProductsSet", userDataStore.findCartForUser(userId).getMapOfProductsInCart());
         engine.process("product/cart.html", context, resp.getWriter());
     }
 
@@ -38,7 +40,8 @@ public class CartController extends HttpServlet {
         int productToRemoveId = Integer.parseInt(request.getParameter("removeFromCart"));
         boolean isRemovable = false;
         Product productToRemove = null;
-        Cart cart = UserDaoMem.getInstance().findCartForUser(0);
+        UserDao user = new UserDaoJdbc();
+        Cart cart = user.findCartForUser(1);
 
         for (Product product : cart.getAll()) {
             if (product.getId() == productToRemoveId) {
