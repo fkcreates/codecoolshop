@@ -61,7 +61,6 @@ public class Cart {
                 mapOfProducts.put(product, productCounter);
             }
         }
-
         return mapOfProducts;
     }
 
