@@ -2,6 +2,10 @@ package com.codecool.shop.config;
 
 import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
+import com.codecool.shop.dao.implementation.mem.CartDaoMem;
+import com.codecool.shop.dao.implementation.mem.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.mem.SupplierDaoMem;
+import com.codecool.shop.dao.implementation.mem.UserDaoMem;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
@@ -10,7 +14,6 @@ import com.codecool.shop.model.User;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
-import java.io.FileNotFoundException;
 
 @WebListener
 public class Initializer implements ServletContextListener {
