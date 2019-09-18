@@ -42,53 +42,56 @@
 </div>
 
 <div class="container">
-    <div class="card shopping-cart">
-        <div class="card-header bg-dark text-light">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            Checkout
-            <a href="/" class="btn btn-outline-info btn-sm pull-right">Back to shopping</a>
-            <div class="clearfix"></div>
-        </div>
-        <div class="card-body">
-            <!-- PRODUCT -->
-            <div class="row" th:each="prod : ${cartProductsSet}">
-                <div class="col-12 col-sm-12 col-md-2 text-center b-3">
-                    <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80"
-                         th:attr="src='/static/img/product_' + ${prod.key.getId()} + '.jpg'">
+    <div class="col-50">
+        <form name="checkout" action="/payment" method="post" onsubmit="return validateCheckoutForm()">
+            <h3>Billing Address</h3>
+            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="The Real John Wick" required
+                   minlength="1">
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input type="email" id="email" name="email" placeholder="john.wick@example.com" required
+                   minlength="1">
+            <label for="phone"><i class="fa fa-institution"></i> Phone number</label>
+            <input type="text" id="phone" name="phone" placeholder="+36704120102" required
+                   minlength="12" maxlength="12">
+            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required
+                   minlength="1">
+            <label for="city"><i class="fa fa-institution"></i> City</label>
+            <input type="text" id="city" name="city" placeholder="New York" required minlength="1">
+            <div class="row">
+                <div class="col-50">
+                    <label for="state">State</label>
+                    <input type="text" id="state" name="state" placeholder="NY" required minlength="1">
                 </div>
-                <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                    <h4 class="product-name"><strong th:text="${prod.key.name}">Product Name</strong></h4>
-                    <h4>
-                        <small th:text="${prod.key.description}">Product description</small>
-                    </h4>
-                </div>
-                <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                    <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                        <h6>Price: <strong th:text="${prod.key.getDefaultPrice()}">Price <span class="text-muted">$</span></strong>$
-                        </h6>
-                    </div>
-                    <div class="col-4 col-sm-4 col-md-4">
-                        <div class="col-2 col-sm-2 col-md-2 text-right">
-                            <small th:text="${prod.value}">Quantity</small>
-                        </div>
-                    </div>
+                <div class="col-50">
+                    <label for="zip">Zip</label>
+                    <input type="number" id="zip" name="zip" placeholder="10001" required minlength="1">
                 </div>
             </div>
-            <hr>
-            <div class="pull-right">
-                <a href="/cart/show/" class="btn btn-outline-secondary pull-right">
-                    Back to Cart
-                </a>
-            </div>
-        </div>
-        <div class="card-footer">
-            <div class="pull-right" style="margin: 10px">
-                <a href="/pay" class="btn btn-success pull-right">Pay</a>
-                <div class="pull-right" style="margin: 5px">
-                    Total price: <b th:text="${cart.getSumPrice()}">SumPrice</b>$
-                </div>
-            </div>
-        </div>
+            <input type="checkbox" checked="checked" name="sameadr">Shipping address same as billing
+    </div>
+    <input type="submit" value="Continue to payment" class="btn">
+    </form>
+    <form action="/cart" method="get">
+        <button type="submit" href="/cart">Back to shopping cart</button>
+    </form>
+
+<!--            <div class="pull-right">-->
+<!--                <a href="/cart/show/" class="btn btn-outline-secondary pull-right">-->
+<!--                    Back to Cart-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="card-footer">-->
+<!--            <div class="pull-right" style="margin: 10px">-->
+<!--                <a href="/pay" class="btn btn-success pull-right">Pay</a>-->
+<!--                <div class="pull-right" style="margin: 5px">-->
+<!--                    Total price: <b th:text="${cart.getSumPrice()}">SumPrice</b>$-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
     </div>
 </div>
 
