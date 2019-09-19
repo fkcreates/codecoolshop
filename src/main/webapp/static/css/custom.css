@@ -129,8 +129,8 @@
 .jumbotron {
     font-family: "Futura";
     font-size: 60px;
-    color: white;
-    background-image: url("../img/kitchen3.jpg");
+    color: black;
+    background-image: url("../img/wallpaper.jpg");
 }
 
 .category-title {
@@ -153,4 +153,8 @@
 
 body {
     background-color: antiquewhite;
+}
+
+.checkout-btn {
+
 }
