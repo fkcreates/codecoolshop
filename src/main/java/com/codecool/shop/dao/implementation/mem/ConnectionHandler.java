@@ -10,7 +10,7 @@ import java.util.Properties;
 public class ConnectionHandler {
 
     private static Properties prop = loadPropertiesFile();
-    private static final String FILE_NAME = "/Users/fruzsinakiss/Desktop/OOP/TW/TW_4/webshop-java-techiteasy/src/main/webapp/connection.properties";
+    private static final String FILE_NAME = "/home/mili95/codecool/OOP/4_TW/Webshop/webshop-java-techiteasy/src/main/webapp/connection.properties";
 
 
     public static Properties loadPropertiesFile() {
@@ -30,7 +30,7 @@ public class ConnectionHandler {
     }
 
     public static Connection getConnection() throws SQLException {
-        String DB_USER = prop.getProperty("username");
+        String DB_USER = prop.getProperty("user");
         String DB_PASSWORD = prop.getProperty("password");
         String DATABASE = prop.getProperty("database");
 
