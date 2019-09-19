@@ -53,7 +53,7 @@ label {
     font-size: 24px;
 }
 
-.btn {
+/*.btn {
     background-color: #4CAF50;
     color: white;
     padding: 12px;
@@ -63,7 +63,7 @@ label {
     border-radius: 3px;
     cursor: pointer;
     font-size: 17px;
-}
+}*/
 
 .btn:hover {
     background-color: #45a049;
@@ -82,4 +82,9 @@ span.price {
     .col-25 {
         margin-bottom: 20px;
     }
+}
+
+.back {
+    right: 260px;
+
 }

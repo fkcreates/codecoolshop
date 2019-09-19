@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <title>Kitchen Management</title>
+    <title>PA Factory</title>
 
     <!-- Bootstrap components -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -39,7 +39,7 @@
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
 
 <div class="jumbotron text-center">
-    <strong>KITCHEN MANAGEMENT</strong>
+    <strong>PA FACTORY</strong>
 </div>
 
 <div class="container">
@@ -69,27 +69,30 @@
                 <input type="number" id="zip" name="zip" placeholder="10001" required minlength="1">
             </div>
         </div>
-        <input type="checkbox" checked="checked" name="sameadr">Shipping address same as billing
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#successfulPA">Open Modal
+        <button type="button" class="btn btn-dark btn-lg btn-block" data-toggle="modal" data-target="#successfulPA">Open
+            Modal
         </button>
     </div>
-    <form action="/cart/show/" method="get">
-        <button type="submit" href="/cart/show/">Back to shopping cart</button>
-    </form>
+    <br>
+    <div>
+        <form action="/cart/show/" method="get">
+            <button type="submit" href="/cart/show/" class="btn btn-light back">Back to shopping cart</button>
+        </form>
+    </div>
 
     <div class="modal fade bd-example-modal-lg" id="successfulPA" tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">SSSSSSSSSSSSSSSSSSSSSSSSSS</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalLongTitle">CONGRATS ON YOUR SUCCESSFUL PA!</h5>
+                    <button type="button" class="close btn btn-dark" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <iframe src="https://giphy.com/embed/gJoegIKcrHo4kKvUYd" width="480" height="480"></iframe>
-                    :))))))))))))))))))))))))))))))))))))))))))
+                    WELCOME TO THE ADVANCED ROOM!
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-primary" href="/" role="button">Close</a>
