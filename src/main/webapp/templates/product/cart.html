@@ -46,8 +46,8 @@
     <div class="card shopping-cart">
         <div class="card-header bg-dark text-light">
             <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            Shopping cart
-            <a href="/" class="btn btn-outline-info btn-sm pull-right">Continue shopping</a>
+            Your experiences
+            <a href="/" class="btn btn-outline-info btn-sm pull-right">Continue practicing</a>
             <div class="clearfix"></div>
         </div>
         <div class="card-body">
@@ -79,10 +79,6 @@
                             <button type="submit" class="btn btn-outline-danger btn-xs" name="removeFromCart" th:value="${prod.key.id}">
                                 <i class="fa fa-trash" aria-hidden="true"></i>
                             </button>
-
-                            <!--<form method="post">
-                                <button type="submit" class="btn btn-success" name="removeFromCart" th:value="${prod.getId()}">Remove</button>
-                            </form>-->
                         </form>
                     </div>
                 </div>
@@ -91,7 +87,7 @@
         </div>
         <div class="card-footer">
             <div class="pull-right" style="margin: 10px">
-                <a href="/checkout" class="btn btn-dark pull-right">Checkout</a>
+                <a href="/checkout" class="btn btn-dark pull-right">Test your knowledge</a>
                 <div class="pull-right" style="margin: 5px">
                     Total price: <b th:text="${cart.getSumPrice()}">SumPrice</b>$
                 </div>
