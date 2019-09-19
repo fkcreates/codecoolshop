@@ -44,39 +44,59 @@
 
 <div class="container">
     <div class="col-50">
-        <form name="checkout" action="/" method="get">
-            <h3>Billing Address</h3>
-            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="The Real John Wick" required
-                   minlength="1">
-            <label for="email"><i class="fa fa-envelope"></i> Email</label>
-            <input type="email" id="email" name="email" placeholder="john.wick@example.com" required
-                   minlength="1">
-            <label for="phone"><i class="fa fa-institution"></i> Phone number</label>
-            <input type="text" id="phone" name="phone" placeholder="+36704120102" required
-                   minlength="12" maxlength="12">
-            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-            <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required
-                   minlength="1">
-            <label for="city"><i class="fa fa-institution"></i> City</label>
-            <input type="text" id="city" name="city" placeholder="New York" required minlength="1">
-            <div class="row">
-                <div class="col-50">
-                    <label for="state">State</label>
-                    <input type="text" id="state" name="state" placeholder="NY" required minlength="1">
-                </div>
-                <div class="col-50">
-                    <label for="zip">Zip</label>
-                    <input type="number" id="zip" name="zip" placeholder="10001" required minlength="1">
-                </div>
+        <h3>Billing Address</h3>
+        <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+        <input type="text" id="fname" name="firstname" placeholder="The Real John Wick" required
+               minlength="1">
+        <label for="email"><i class="fa fa-envelope"></i> Email</label>
+        <input type="email" id="email" name="email" placeholder="john.wick@example.com" required
+               minlength="1">
+        <label for="phone"><i class="fa fa-institution"></i> Phone number</label>
+        <input type="text" id="phone" name="phone" placeholder="+36704120102" required
+               minlength="12" maxlength="12">
+        <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+        <input type="text" id="adr" name="address" placeholder="542 W. 15th Street" required
+               minlength="1">
+        <label for="city"><i class="fa fa-institution"></i> City</label>
+        <input type="text" id="city" name="city" placeholder="New York" required minlength="1">
+        <div class="row">
+            <div class="col-50">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="NY" required minlength="1">
             </div>
-            <input type="checkbox" checked="checked" name="sameadr">Shipping address same as billing
-            <input type="submit" value="Continue to payment" class="btn">
-        </form>
+            <div class="col-50">
+                <label for="zip">Zip</label>
+                <input type="number" id="zip" name="zip" placeholder="10001" required minlength="1">
+            </div>
+        </div>
+        <input type="checkbox" checked="checked" name="sameadr">Shipping address same as billing
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#successfulPA">Open Modal
+        </button>
     </div>
     <form action="/cart/show/" method="get">
         <button type="submit" href="/cart/show/">Back to shopping cart</button>
     </form>
+
+    <div class="modal fade bd-example-modal-lg" id="successfulPA" tabindex="-1" role="dialog"
+         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">SSSSSSSSSSSSSSSSSSSSSSSSSS</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <iframe src="https://giphy.com/embed/gJoegIKcrHo4kKvUYd" width="480" height="480"></iframe>
+                    :))))))))))))))))))))))))))))))))))))))))))
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary" href="/" role="button">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--            <div class="pull-right">-->
     <!--                <a href="/cart/show/" class="btn btn-outline-secondary pull-right">-->
