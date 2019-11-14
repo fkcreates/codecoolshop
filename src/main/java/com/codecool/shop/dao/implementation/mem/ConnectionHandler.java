@@ -1,5 +1,6 @@
 package com.codecool.shop.dao.implementation.mem;
 
+import javax.servlet.ServletContext;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -9,24 +10,22 @@ import java.util.Properties;
 
 public class ConnectionHandler {
 
-    private static Properties prop = loadPropertiesFile();
-    private static final String FILE_NAME = "/Users/fruzsinakiss/Desktop/OOP/TW/TW_4/webshop-java-techiteasy/src/main/webapp/connection.properties";
+    private static Properties prop = null;
+    private static final String FILE_NAME = "/connection.properties";
 
 
-    public static Properties loadPropertiesFile() {
+    public static void loadPropertiesFile(ServletContext servletContext) {
         try {
             Properties prop = new Properties();
-            InputStream in = new FileInputStream(FILE_NAME);
+            InputStream in = servletContext.getResourceAsStream(FILE_NAME);
             prop.load(in);
             in.close();
-            return prop;
+            ConnectionHandler.prop = prop;
         }
         catch (Exception e) {
             System.err.println("Couldn't read properties file: " + FILE_NAME);
             System.exit(1);
         }
-
-        return null;
     }
 
     public static Connection getConnection() throws SQLException {
