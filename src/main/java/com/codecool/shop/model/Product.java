@@ -9,12 +9,12 @@ public class Product extends BaseModel {
     private ProductCategory productCategory;
     private Supplier supplier;
 
-
-    public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier) {
-        super(name, description);
+    //TODO: add category_id and supplier_id to constructor. for this we need to fill up supplier and also prodCat tables
+    //dont forget to give back category_id and supplier_id to product table in sql database!!!!!
+    
+    public Product(int id, String name, float defaultPrice, String currencyString, String description) {
+        super(id, name, description);
         this.setPrice(defaultPrice, currencyString);
-        this.setSupplier(supplier);
-        this.setProductCategory(productCategory);
     }
 
     public float getDefaultPrice() {
@@ -34,7 +34,7 @@ public class Product extends BaseModel {
     }
 
     public String getPrice() {
-        return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
+        return String.valueOf(this.defaultPrice) + ' ' + this.defaultCurrency.toString();
     }
 
     public void setPrice(float price, String currency) {

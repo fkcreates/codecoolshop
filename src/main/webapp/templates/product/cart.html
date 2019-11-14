@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>PA Factory</title>
+
+    <!-- Bootstrap components -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <!-- Latest compiled and minified Jquery -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!--    <script src="https://code.jquery.com/jquery-3.3.1.min.js"-->
+    <!--            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>-->
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"-->
+    <!--            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"-->
+    <!--            crossorigin="anonymous"></script>-->
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+</head>
+<body>
+
+<script src="https://use.fontawesome.com/c560c025cf.js"></script>
+
+<div class="jumbotron text-center">
+    <strong>PA Factory</strong>
+</div>
+
+
+<div class="container">
+    <div class="card shopping-cart">
+        <div class="card-header bg-dark text-light">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            Your experiences
+            <a href="/" class="btn btn-outline-info btn-sm pull-right">Continue practicing</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="card-body">
+            <!-- PRODUCT -->
+            <div class="row" th:each="prod : ${cartProductsSet}">
+                <div class="col-12 col-sm-12 col-md-2 text-center b-3">
+                    <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80"
+                         th:attr="src='/static/img/product_' + ${prod.key.getId()} + '.jpg'">
+                </div>
+                <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                    <h4 class="product-name"><strong th:text="${prod.key.name}">Product Name</strong></h4>
+                    <h4>
+                        <small th:text="${prod.key.description}">Product description</small>
+                    </h4>
+                </div>
+                <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                    <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                        <h6>Price: <strong th:text="${prod.key.getDefaultPrice()}">Price <span class="text-muted">$</span></strong>$
+                        </h6>
+                    </div>
+                    <div class="col-4 col-sm-4 col-md-4">
+                        <div class="quantity">
+                            <input type="number" step="1" max="99" min="1" th:value="${prod.value}" title="Qty" class="qty"
+                                   size="4">
+                        </div>
+                    </div>
+                    <div class="col-2 col-sm-2 col-md-2 text-right">
+                        <form method="post">
+                            <button type="submit" class="btn btn-outline-danger btn-xs" name="removeFromCart" th:value="${prod.key.id}">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+        <div class="card-footer">
+            <div class="pull-right" style="margin: 10px">
+                <a href="/checkout" class="btn btn-dark pull-right">Test your knowledge</a>
+                <div class="pull-right" style="margin: 5px">
+                    Total price: <b th:text="${cart.getSumPrice()}">SumPrice</b>$
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+
+</body>
+</html>
