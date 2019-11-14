@@ -1,7 +1,5 @@
 package com.codecool.shop.model;
 
-import org.graalvm.compiler.lir.alloc.lsra.IntervalWalker;
-
 import java.text.DecimalFormat;
 import java.util.*;
 

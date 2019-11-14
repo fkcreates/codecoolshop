@@ -15,6 +15,10 @@ public class UserDaoJdbc implements UserDao {
     private static UserDaoJdbc instance = null;
     private static User user;
 
+    private UserDaoJdbc(){
+
+    }
+
     public static UserDaoJdbc getInstance(){
         if (instance == null) {
             user = new User(1, "first user");

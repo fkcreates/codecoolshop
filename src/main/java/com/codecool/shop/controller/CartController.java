@@ -23,8 +23,8 @@ public class CartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-        UserDao userDataStore = new UserDaoJdbc();
-        int userId = 1;
+        UserDao userDataStore = UserDaoJdbc.getInstance();
+        int userId = 1;  // TODO: get from request
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
@@ -40,8 +40,8 @@ public class CartController extends HttpServlet {
         int productToRemoveId = Integer.parseInt(request.getParameter("removeFromCart"));
         boolean isRemovable = false;
         Product productToRemove = null;
-        UserDao user = new UserDaoJdbc();
-        Cart cart = user.findCartForUser(1);
+        UserDao userDataStore = UserDaoJdbc.getInstance();
+        Cart cart = userDataStore.findCartForUser(1);
 
         for (Product product : cart.getAll()) {
             if (product.getId() == productToRemoveId) {

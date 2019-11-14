@@ -18,7 +18,7 @@ public class CheckoutController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDao userDataStore = new UserDaoJdbc();
+        UserDao userDataStore = UserDaoJdbc.getInstance();
         int userId = 1;
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
