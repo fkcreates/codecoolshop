@@ -2,7 +2,7 @@
 
 This is a practice project for working with OOP principles using Java in Codecool programming school.
 The project is based on a simple webshop where user can chose from items 
-that would come handy in preparing for and passing a PA (Personal Assesment, aka exam) to move forward between modules..
+that would come handy in preparing for and passing a PA (Personal Assesment, aka exam) to move forward between modules.
 
 ### Install
 
